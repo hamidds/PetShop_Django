@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^$',views.home,name='home'),
     # url(r'^adoptions/(\d+)/',views.pet_detail,name='pet_detail'),
     path('adoptions/<int:id>/',views.pet_detail,name ='pet_detail'),
+    path('display/', views.pet_submission),
 ]

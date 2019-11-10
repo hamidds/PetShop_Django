@@ -1,10 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
+from .forms import UserModelForm
 
 
 from .models import Pet
 
+def pet_submission(request):
+    if request.method == 'POST':
+        form = UserModelForm(request.POST)
+        if form.is_valid():
+
+            u = form.save()
+            users = Pet.objects.all()
+
+            return render(request, 'display.html', {'users': users})
+    else:
+        form_class = UserModelForm
+        return render(request, 'userdetails.html', {
+        'form': form_class,
+    })
 
 def home(request):
     pets = Pet.objects.all()
